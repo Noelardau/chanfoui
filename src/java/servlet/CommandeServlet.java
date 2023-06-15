@@ -104,7 +104,17 @@ public class CommandeServlet extends HttpServlet {
        
         
         
-        if(!"".equals(request.getParameter("idClient")) && !"".equals(request.getParameter("dateCommande"))){
+        
+       
+        if(request.getParameter("key")!= null){
+           
+            request.setAttribute("resultPage", "oiu");
+            request.setAttribute("commandes", Commande.searchCommande(request.getParameter("key"), Bdd.getConnection()));
+            this.getServletContext().getRequestDispatcher("/pages/commandePage.jsp").forward(request, response);
+            
+        }else{
+            
+            if(!"".equals(request.getParameter("idClient")) && !"".equals(request.getParameter("dateCommande"))){
              int idClient = Integer.valueOf(request.getParameter("idClient"));
              String dateCommande = request.getParameter("dateCommande");
              
@@ -123,11 +133,12 @@ public class CommandeServlet extends HttpServlet {
             request.setAttribute("error", "Remplissez tout les champs!!");
             
         }
-       
-        
-        request.setAttribute("commandes", Commande.getListCommande(Bdd.getConnection()));
+             request.setAttribute("commandes", Commande.getListCommande(Bdd.getConnection()));
          this.getServletContext().getRequestDispatcher("/pages/commandePage.jsp").forward(request, response);
-    }
+    
+        }
+        
+       }
 
     /**
      * Returns a short description of the servlet.

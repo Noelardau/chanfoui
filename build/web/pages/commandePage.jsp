@@ -3,7 +3,7 @@
 <h1 class="ui header titreSection">Les commandes</h1>
 
 
-<form action="/Test/ProduitServlet" method="post" class="ui form tiny" style="display:inline-block">
+<form action="/Test/CommandeServlet" method="post" class="ui form tiny" style="display:inline-block">
     <div class="field inline">
         <input type="search" name="key"/>  <label><i class="ui search icon"></i></label>       
     </div>
@@ -14,7 +14,7 @@
 
 <button class="ui button primary addCommande"><i class="ui add icon"></i></button>
   <c:if test="${!empty resultPage}">                              
-    <a href="/Test/ProduitServlet">Revenir à la liste</a>
+    <a href="/Test/CommandeServlet">Revenir à la liste</a>
     </c:if>
 
   

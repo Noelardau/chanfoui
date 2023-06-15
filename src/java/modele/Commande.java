@@ -114,7 +114,7 @@ public class Commande {
         
         
         try{
-            PreparedStatement p =  c.prepareStatement("SELECT * FROM commande NATURAL JOIN client ORDER BY dateCommande");
+            PreparedStatement p =  c.prepareStatement("SELECT * FROM commande NATURAL JOIN client ORDER BY dateCommande DESC");
             
             ResultSet r = p.executeQuery();
             
@@ -242,6 +242,37 @@ public class Commande {
         }
         return nb;
     }
+ 
+  public static ArrayList<Commande> searchCommande(String key, Connection c){
+          
+          ArrayList<Commande> resultSearch = new ArrayList();
+           try {
+            
+            PreparedStatement p = c.prepareStatement("SELECT * FROM commande NATURAL JOIN client WHERE nomClient LIKE '%"+key+"%' OR prenomClient LIKE '%"+key+"%' ORDER BY dateCommande");
+            
+            
+            
+            ResultSet res = p.executeQuery();
+            
+            while(res.next()){
+               
+                resultSearch.add(new Commande(res.getInt("idCommande"),res.getString("nomClient"), res.getString("prenomClient"), res.getString("dateCommande"),res.getInt("paye")));
+                
+                
+            }
+        }catch(SQLException e){
+            
+            
+            
+        }
+        
+        return resultSearch;     
+          
+                   
+          
+      }
+      
+   
 
 
 
